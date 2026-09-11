@@ -20,7 +20,7 @@ class StringOutput extends Output
         $this->output = '';
     }
 
-    protected function doWrite($message, $newline)
+    protected function doWrite($message, $newline): void
     {
         $this->output .= $message.($newline ? "\n" : '');
     }
