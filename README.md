@@ -62,7 +62,7 @@
 
 ### 环境
  - PHP >= 7.1.0
- - Laravel 5.5.0 ~ 9.*
+ - Laravel 5.5.0 ~ 13.*（实际 PHP 最低版本取决于所选 Laravel 版本；Laravel 13 要求 PHP >= 8.3）
  - Fileinfo PHP Extension
 
 ### 安装
