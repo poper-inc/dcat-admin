@@ -3,11 +3,12 @@
 namespace Dcat\Admin\Models;
 
 use Dcat\Admin\Admin;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 trait MenuCache
 {
-    protected $cacheKey = 'dcat-admin-menus-%d-%s';
+    protected $cacheKey = 'dcat-admin-menus-v2-%d-%s';
 
     /**
      * Get an item from the cache, or execute the given Closure and store the result.
@@ -21,7 +22,12 @@ trait MenuCache
             return $builder();
         }
 
-        return $this->getStore()->remember($this->getCacheKey(), null, $builder);
+        // Cache plain data so hosts can disable PHP object unserialization.
+        $nodes = $this->getStore()->remember($this->getCacheKey(), null, function () use ($builder) {
+            return $builder()->toArray();
+        });
+
+        return new Collection($nodes);
     }
 
     /**

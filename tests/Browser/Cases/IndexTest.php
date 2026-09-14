@@ -4,13 +4,13 @@ namespace Tests\Browser\Cases;
 
 use Dcat\Admin\Admin;
 use Laravel\Dusk\Browser;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
 /**
  * 首页功能测试.
- *
- * @group index
  */
+#[Group('index')]
 class IndexTest extends TestCase
 {
     public function testIndex()

@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
 /**
  * Section功能测试.
- *
- * @group section
  */
+#[Group('section')]
 class SectionTest extends TestCase
 {
     protected $login = false;

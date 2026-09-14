@@ -8,12 +8,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * WebUploader文件上传处理.
- *
- * @property string $_id
- * @property int $chunk
- * @property int $chunks
- * @property string $upload_column
- * @property UploadedFile $file
  */
 class WebUploader
 {
@@ -21,11 +15,24 @@ class WebUploader
 
     public $temporaryDirectory = 'tmp';
 
+    public $_id;
+
+    public $chunk;
+
+    public $chunks;
+
+    public $upload_column;
+
+    /**
+     * @var UploadedFile|null
+     */
+    public $file;
+
     protected $temporaryFilePath;
 
     protected $completeFile;
 
-    public function __construct(Request $request = null)
+    public function __construct(?Request $request = null)
     {
         $request = $this->prepareRequest($request ?: request());
 
