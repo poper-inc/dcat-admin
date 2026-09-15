@@ -82,6 +82,10 @@ class ExcelExporter extends AbstractExporter
                 $writer->addRow($this->createRow($row));
             }
         }
+
+        if (!$headingsWritten && $titles !== false) {
+            $writer->addRow($this->createRow($titles));
+        }
     }
 
     protected function exportRows(): \Generator
