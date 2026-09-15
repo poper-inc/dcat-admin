@@ -3,13 +3,13 @@
 namespace Tests\Browser\Cases\Form;
 
 use Laravel\Dusk\Browser;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
 /**
  * 图片上传测试.
- *
- * @group form:image
  */
+#[Group('form:image')]
 class ImageTest extends TestCase
 {
     public function test()

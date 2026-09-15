@@ -61,8 +61,8 @@
 
 
 ### 环境
- - PHP >= 7.1.0
- - Laravel 5.5.0 ~ 9.*
+ - PHP >= ^8.3
+ - Laravel ^12.0|^13.0
  - Fileinfo PHP Extension
 
 ### 安装

@@ -5,6 +5,11 @@ namespace Dcat\Admin\Grid;
 abstract class BatchAction extends GridAction
 {
     /**
+     * @var string|null
+     */
+    public $selectorPrefix;
+
+    /**
      * {@inheritdoc}
      */
     protected function actionScript()

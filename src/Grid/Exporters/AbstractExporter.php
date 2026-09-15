@@ -30,6 +30,11 @@ abstract class AbstractExporter implements ExporterInterface
     protected $builder;
 
     /**
+     * @var Collection|null
+     */
+    protected $modelQueries;
+
+    /**
      * @var array
      */
     protected $titles = [];
@@ -65,11 +70,15 @@ abstract class AbstractExporter implements ExporterInterface
      * Set the headings of excel sheet.
      *
      * @param  array|false  $titles
-     * @return $this|array
+     * @return $this|array|bool
      */
     public function titles($titles = null)
     {
         if ($titles === null) {
+            if ($this->titles === false) {
+                return false;
+            }
+
             return $this->titles ?: ($this->titles = $this->defaultTitles());
         }
 

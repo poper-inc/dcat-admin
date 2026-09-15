@@ -19,18 +19,17 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
-        "laravel/framework": "~5.5|~6.0|~7.0|~8.0|~9.0|~10.0|~11.0|~12.0",
-        "spatie/eloquent-sortable": "3.*|4.*",
-        "doctrine/dbal": "^2.6|^3.0|^4.0",
-        "dcat/easy-excel": "*"
+        "php": "^8.3",
+        "laravel/framework": "^12.0|^13.0",
+        "spatie/eloquent-sortable": "^4.0||^5.0",
+        "openspout/openspout": "^4.0|^5.0"
     },
     "require-dev": {
-        "laravel/dusk": "~5.9|~6|~7.0|~8.0",
-        "phpstan/phpstan": "^0.12.0|~1.0",
-        "phpunit/phpunit": "^7.5|~9|~10|~11",
         "fakerphp/faker": "^1.23",
-        "mockery/mockery": "^1.6"
+        "mockery/mockery": "^1.6",
+        "laravel/dusk": "^8.0",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11|^12|^13"
     },
     "autoload": {
         "psr-4": {
@@ -55,5 +54,10 @@
                 "Dcat\\Admin\\AdminServiceProvider"
             ]
         }
-    }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
