@@ -5,7 +5,7 @@
 
     <span class="ext-name">
         @if($row->homepage)
-            <a href='{!! $row->homepage !!}' target='_blank' class="feather {{ $linkIcon }}"></a>
+            <a href='{{ $row->homepage }}' target='_blank' class="feather {{ $linkIcon }}"></a>
         @endif
 
         @if($row->alias)
