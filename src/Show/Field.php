@@ -285,6 +285,8 @@ class Field implements Renderable
                 }
 
                 $icon = Helper::getFileIcon($name);
+                $name = e($name);
+                $url = e($url);
 
                 return <<<HTML
 <li style="margin-bottom: 0;">
