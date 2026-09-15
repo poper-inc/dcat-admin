@@ -1,3 +1,4 @@
+import escapeHtml from '../../js/extensions/EscapeHtml';
 
 export default class Request {
     constructor(Uploader) {
@@ -10,7 +11,7 @@ export default class Request {
             options = parent.options,
             uploader = parent.uploader;
 
-        Dcat.confirm(parent.lang.trans('confirm_delete_file'), file.serverId, function () {
+        Dcat.confirm(parent.lang.trans('confirm_delete_file'), escapeHtml(file.serverId), function () {
             var post = options.deleteData;
 
             post.key = file.serverId;
