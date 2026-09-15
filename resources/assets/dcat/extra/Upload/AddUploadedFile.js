@@ -17,31 +17,30 @@ export default class AddUploadedFile {
             showImg = parent.isImage(),
             html = "";
 
-        html += "<li title='" + file.serverPath + "'>";
+        html += "<li>";
 
         if (! showImg && options.sortable) {
             // 文件排序
             html += `
-<p style="right: 65px" class="file-action" data-file-act='order' data-order="1" data-id='${file.serverId}'><i class='feather icon-arrow-up'></i></p>
-<p style="right: 45px" class="file-action" data-file-act='order' data-order="0" data-id='${file.serverId}'><i class='feather icon-arrow-down'></i></p>
+<p style="right: 65px" class="file-action" data-file-act='order' data-order="1" data-id=''><i class='feather icon-arrow-up'></i></p>
+<p style="right: 45px" class="file-action" data-file-act='order' data-order="0" data-id=''><i class='feather icon-arrow-down'></i></p>
 `;
         }
 
         // 下载
         if (! showImg && options.downloadable) {
             html += `
-<p style="right: 25px" class="file-action" data-file-act='download' data-id='${file.serverUrl}'><i class='feather icon-download-cloud'></i></p>
+<p style="right: 25px" class="file-action" data-file-act='download' data-id=''><i class='feather icon-download-cloud'></i></p>
 `;
         }
 
         if (showImg) {
-            html += `<p class='imgWrap'><img src='${file.serverUrl}'></p>`
+            html += `<p class='imgWrap'><img src=''></p>`
         } else if (!options.disabled) {
-            html += `<p class="file-action" data-file-act="delete" data-id="${file.serverId}"><i class="feather icon-trash red-dark"></i></p>`;
+            html += `<p class="file-action" data-file-act="delete" data-id=""><i class="feather icon-trash red-dark"></i></p>`;
         }
 
         html += "<p class='title' style=''><i class='feather icon-check text-white icon-success text-white'></i>";
-        html += file.serverPath;
         html += "</p>";
 
         if (showImg) {
@@ -49,15 +48,15 @@ export default class AddUploadedFile {
             html += "<div class='file-panel' >";
 
             if (!options.disabled) {
-                html += `<a class='btn btn-sm btn-white' data-file-act='deleteurl' data-id='${file.serverId}'><i class='feather icon-trash red-dark' style='font-size:13px'></i></a>`;
+                html += `<a class='btn btn-sm btn-white' data-file-act='deleteurl' data-id=''><i class='feather icon-trash red-dark' style='font-size:13px'></i></a>`;
             }
-            html += `<a class='btn btn-sm btn-white' data-file-act='preview' data-url='${file.serverUrl}' ><i class='feather icon-zoom-in'></i></a>`;
+            html += `<a class='btn btn-sm btn-white' data-file-act='preview' data-url='' ><i class='feather icon-zoom-in'></i></a>`;
 
             if (options.sortable) {
                 // 文件排序
                 html += `
-<a class='btn btn-sm btn-white' data-file-act='order' data-order="1" data-id='${file.serverId}'><i class='feather icon-arrow-up'></i></a>
-<a class='btn btn-sm btn-white' data-file-act='order' data-order="0" data-id='${file.serverId}'><i class='feather icon-arrow-down'></i></a>
+<a class='btn btn-sm btn-white' data-file-act='order' data-order="1" data-id=''><i class='feather icon-arrow-up'></i></a>
+<a class='btn btn-sm btn-white' data-file-act='order' data-order="0" data-id=''><i class='feather icon-arrow-down'></i></a>
 `;
             }
 
@@ -67,7 +66,13 @@ export default class AddUploadedFile {
         }
 
         html += "</li>";
-        html = $(html);
+        // Set untrusted file data through DOM APIs instead of parsing it as HTML.
+        html = $(html).attr('title', file.serverPath);
+        html.find('.title').first().append(document.createTextNode(file.serverPath || ''));
+        html.find('[data-id]').attr('data-id', file.serverId);
+        html.find('[data-file-act="download"]').attr('data-id', file.serverUrl);
+        html.find('[data-file-act="preview"]').attr('data-url', file.serverUrl);
+        html.find('img').attr('src', file.serverUrl);
 
         if (!showImg) {
             html.find('.file-type').show();

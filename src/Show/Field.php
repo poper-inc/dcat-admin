@@ -236,6 +236,8 @@ class Field implements Renderable
                     }
                 }
 
+                $src = e($src);
+
                 return "<img data-action='preview-img' src='$src' style='max-width:{$width}px;max-height:{$height}px' class='img' />";
             })->implode('&nbsp;');
         });
