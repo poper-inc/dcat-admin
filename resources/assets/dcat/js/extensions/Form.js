@@ -1,5 +1,6 @@
 
 import '../jquery-form/jquery.form.min';
+import escapeHtml from './EscapeHtml';
 
 let formCallbacks = {
         before: [], success: [], error: []
@@ -143,10 +144,10 @@ class Form {
                     if (response.status != 422 || ! error || ! Dcat.helpers.isset(error, 'errors')) {
                         let json = response.responseJSON;
                         if (json && json.message) {
-                            return Dcat.error(json.message);
+                            return Dcat.error(escapeHtml(json.message));
                         }
 
-                        return Dcat.error(response.status + ' ' + response.statusText);
+                        return Dcat.error(escapeHtml(response.status + ' ' + response.statusText));
                     }
                     error = error.errors;
 
@@ -156,7 +157,7 @@ class Form {
                     }
 
                 } catch (e) {
-                    return Dcat.error(response.status + ' ' + response.statusText);
+                    return Dcat.error(escapeHtml(response.status + ' ' + response.statusText));
                 }
             }
         });
@@ -176,12 +177,12 @@ class Form {
 
                 for (let j in msg) {
                     $group.find(_this.options.errorContainerSelector).first().append(
-                        _this.options.errorTemplate.replace('{message}', msg[j])
+                        _this.options.errorTemplate.replace('{message}', () => escapeHtml(msg[j]))
                     );
                 }
 
                 if (_this.options.validationErrorToastr) {
-                    Dcat.error(msg.join('<br/>'));
+                    Dcat.error(msg.map(escapeHtml).join('<br/>'));
                 }
             };
 
@@ -192,7 +193,7 @@ class Form {
 
         if (! $field) {
             if (Dcat.helpers.len(errors) && errors.length) {
-                Dcat.error(errors.join("  \n  "));
+                Dcat.error(errors.map(escapeHtml).join("  \n  "));
             }
             return;
         }

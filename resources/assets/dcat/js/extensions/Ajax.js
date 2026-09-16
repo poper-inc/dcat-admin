@@ -1,3 +1,4 @@
+import escapeHtml from './EscapeHtml';
 
 export default class Ajax {
     constructor(Dcat) {
@@ -62,7 +63,7 @@ export default class Ajax {
     handleAjaxError(xhr, text, msg) {
         let Dcat = this.dcat,
             json = xhr.responseJSON || {},
-            _msg = json.message;
+            _msg = json.message ? escapeHtml(json.message) : '';
 
         Dcat.NP.done();
         Dcat.loading(false);// 关闭所有loading效果
@@ -93,7 +94,7 @@ export default class Ajax {
                     try {
                         var err = [], i;
                         for (i in json.errors) {
-                            err.push(json.errors[i].join('<br/>'));
+                            err.push(json.errors[i].map(escapeHtml).join('<br/>'));
                         }
                         Dcat.error(err.join('<br/>'));
                     } catch (e) {}
@@ -103,7 +104,7 @@ export default class Ajax {
                 return;
         }
 
-        Dcat.error(_msg || (xhr.status + ' ' + msg));
+        Dcat.error(_msg || escapeHtml(xhr.status + ' ' + msg));
     }
 
     // 处理接口返回数据

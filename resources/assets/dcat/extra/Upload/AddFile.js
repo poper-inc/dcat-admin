@@ -123,7 +123,7 @@ export default class AddFile {
             }
 
             if (_this.uploader.helper.isSupportBase64) {
-                img = $('<img src="' + src + '">');
+                img = $('<img>').attr('src', src);
                 $wrap.append(img);
             } else {
                 $li.find('.file-type').show();

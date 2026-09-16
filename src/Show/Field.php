@@ -236,6 +236,8 @@ class Field implements Renderable
                     }
                 }
 
+                $src = e($src);
+
                 return "<img data-action='preview-img' src='$src' style='max-width:{$width}px;max-height:{$height}px' class='img' />";
             })->implode('&nbsp;');
         });
@@ -283,6 +285,8 @@ class Field implements Renderable
                 }
 
                 $icon = Helper::getFileIcon($name);
+                $name = e($name);
+                $url = e($url);
 
                 return <<<HTML
 <li style="margin-bottom: 0;">

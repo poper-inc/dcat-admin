@@ -22,6 +22,8 @@ class Image extends AbstractDisplayer
                 $src = Storage::disk(config('admin.upload.disk'))->url($path);
             }
 
+            $src = e($src);
+
             return "<img data-action='preview-img' src='$src' style='max-width:{$width}px;max-height:{$height}px;cursor:pointer' class='img img-thumbnail' />";
         })->implode('&nbsp;');
     }
